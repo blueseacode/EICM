@@ -52,14 +52,18 @@ public class PathUtil {
 	 * 获取classpath1
 	 */
 	public static String getClasspath() {
-		return (String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../").replaceAll("file:/", "").replaceAll("%20", " ").trim();
+		/* 2015-07-15, junyuli, modify, 修改获取classpath在非windows环境下无效的问题 */
+//		return (String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../").replaceAll("file:/", "").replaceAll("%20", " ").trim();
+		return (Thread.currentThread().getContextClassLoader().getResource("").getFile() + "../../").replaceAll("%20", " ").trim();
 	}
 
 	/*
 	 * 获取classpath2
 	 */
 	public static String getClassResources() {
-		return (String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))).replaceAll("file:/", "").replaceAll("%20", " ").trim();
+		/* 2015-07-15, junyuli, modify, 修改获取classpath在非windows环境下无效的问题 */
+//		return (String.valueOf(Thread.currentThread().getContextClassLoader().getResource(""))).replaceAll("file:/", "").replaceAll("%20", " ").trim();
+		return (Thread.currentThread().getContextClassLoader().getResource("").getFile()).replaceAll("%20", " ").trim();
 	}
 
 	public static String PathAddress() {
